@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eaglercraft Ported Clients Directory</title>
+    <style>
+        :root {
+            --color-bg-main: #ffffff;
+            --color-bg-secondary: #f4f5f7;
+            --color-border: #d1d5db;
+            --color-text-main: #111827;
+            --color-text-muted: #4b5563;
+            --color-accent: #2563eb;
+            --color-accent-hover: #1d4ed8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--color-bg-main);
+            color: var(--color-text-main);
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        header {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--color-text-main);
+            margin-bottom: 4px;
+        }
+
+        .meta-line {
+            font-size: 14px;
+            color: var(--color-text-muted);
+        }
+
+        .meta-line span {
+            font-weight: 600;
+            color: var(--color-text-main);
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            background-color: #ffffff;
+        }
+
+        .search-input:focus {
+            outline: 2px solid var(--color-accent);
+            outline-offset: -1px;
+        }
+
+        .select-filter {
+            padding: 8px 12px;
+            font-size: 14px;
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            background-color: var(--color-bg-secondary);
+            cursor: pointer;
+        }
+
+        .client-table-container {
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #ffffff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: var(--color-bg-secondary);
+            color: var(--color-text-muted);
+            font-weight: 600;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--color-border);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: top;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: #f9fafb;
+        }
+
+        .client-name {
+            font-weight: 600;
+            color: var(--color-text-main);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: 500;
+            background-color: #e5e7eb;
+            color: var(--color-text-muted);
+            border-radius: 3px;
+        }
+
+        .actions-cell {
+            display: flex;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: 500;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: #ffffff;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--color-accent-hover);
+        }
+
+        footer {
+            margin-top: 48px;
+            padding-top: 16px;
+            border-top: 1px solid var(--color-border);
+            font-size: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .disclaimer {
+            font-style: normal;
+            font-weight: 500;
+            color: #71717a;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Eaglercraft Ported Clients</h1>
+            <div class="meta-line">Maintained and compiled by <span>blackmun</span> & <span>notaorange</span></div>
+        </header>
+
+        <div class="toolbar">
+            <input type="text" id="searchBar" class="search-input" placeholder="Filter by client name or porter...">
+            <select id="porterFilter" class="select-filter">
+                <option value="all">All Porters</option>
+                <option value="notaorange">notaorange</option>
+                <option value="blackmun">blackmun</option>
+            </select>
+        </div>
+
+        <div class="client-table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 30%;">Client</th>
+                        <th style="width: 25%;">Ported By</th>
+                        <th style="width: 25%;">WASM-GC</th>
+                        <th style="width: 20%;">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="clientTableBody">
+                    <tr class="client-row" data-porter="notaorange">
+                        <td>
+                            <span class="client-name">LiquidBounce</span>
+                        </td>
+                        <td>notaorange</td>
+                        <td><span class="badge">Yes</span></td>
+                        <td>
+                            <div class="actions-cell">
+                                <a href="assets/Liquidbounce.html" class="btn btn-primary">Launch</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="client-row" data-porter="blackmun">
+                        <td>
+                            <span class="client-name">RavenBS</span>
+                        </td>
+                        <td>blackmun</td>
+                        <td><span class="badge">Yes</span></td>
+                        <td>
+                            <div class="actions-cell">
+                                <a href="assets/RavenBS.html" class="btn btn-primary">Launch</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="client-row" data-porter="notaorange">
+                        <td>
+                            <span class="client-name">Raven A+</span>
+                        </td>
+                        <td>notaorange</td>
+                        <td><span class="badge">Yes</span></td>
+                        <td>
+                            <div class="actions-cell">
+                                <a href="assets/RavenA+.html" class="btn btn-primary">Launch</a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer>
+            <span class="disclaimer">This project is independent and not affiliated with Mojang Studios or Microsoft.</span>
+        </footer>
+    </div>
+
+    <script>
+        const searchBar = document.getElementById('searchBar');
+        const porterFilter = document.getElementById('porterFilter');
+        const rows = document.querySelectorAll('.client-row');
+
+        function filterTable() {
+            const searchQuery = searchBar.value.toLowerCase();
+            const selectedPorter = porterFilter.value;
+
+            rows.forEach(row => {
+                const textContent = row.textContent.toLowerCase();
+                const rowPorter = row.getAttribute('data-porter');
+
+                const matchesSearch = textContent.includes(searchQuery);
+                const matchesPorter = (selectedPorter === 'all' || rowPorter === selectedPorter);
+
+                if (matchesSearch && matchesPorter) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        searchBar.addEventListener('input', filterTable);
+        porterFilter.addEventListener('change', filterTable);
+    </script>
+</body>
+</html>
